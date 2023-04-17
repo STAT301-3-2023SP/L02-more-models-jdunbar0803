@@ -1,7 +1,7 @@
 ---
 title: "L02 More Models"
 subtitle: "Data Science 3 with R (STAT 301-3)"
-author: "YOUR NAME"
+author: "Justin Dunbar"
 
 format:
   html:

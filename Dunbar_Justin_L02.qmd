@@ -1,0 +1,52 @@
+---
+title: "L02 More Models"
+subtitle: "Data Science 3 with R (STAT 301-3)"
+author: "Justin Dunbar"
+
+format:
+  html:
+    toc: true
+    embed-resources: true
+    echo: false
+    link-external-newwindow: true
+    
+execute:
+  warning: false
+
+from: markdown+emoji  
+---
+
+```{r}
+#| eval: false
+library(tidyverse)
+library(gtExtras)
+library(gt)
+```
+
+## Github Repo Link
+
+<https://github.com/STAT301-3-2023SP/L02-more-models-jdunbar0803>
+
+## Write Up
+
+Using wildfire protection data, we want to predict where or not a wildfire will reach it. To do this, we trained several different types of classification models, looking for the one that provides the strongest accuracy. In total, the following eight models were evaluated:
+
+-   Elastic Net
+-   Nearest Neighbors
+-   Random Forest
+-   Boosted Tree
+-   Support Vector Machine (polynomial)
+-   Support Vector Machine (radial basis function/RBF)
+-   Single Layer Neural Network (MLP)
+-   Multivariate Adaptive Regression Splines (MARS)
+
+To fully optimize each model, specific parameters were tuned; they're being evaluated off of their peak point. Using accuracy as our performance metric of interest, the results were as follows:
+
+```{r}
+#| eval: false
+Model_Results <- read_csv("L02_Model_Results - Sheet1.csv")
+gt(Model_Results) %>%
+  gt_theme_excel()
+```
+
+Although by a very slim margin, the Single Layer Neural Network model (mlp) had the highest accuracy, without a significant cost in extra run time. To obtain the mean accuracy rate of 82%, the model required a penalty value of 1 with 10 hidden units. The model also performed better with an area of 89.2% under the curve (roc_auc) outside of the MARS model (89.8%), yet the mlp model had a slightly better f-score (.803 vs .801), precision (.825 vs .824), sensitivity (.786 vs .784), recall (.786 vs .784), and specificity (.85 vs .849). As such, it is safe to conclude that the mlp model is superior to the others. With that, we were able to train and fit the model to our dataset smoothly with confidence in the model chosen.
